@@ -20,14 +20,14 @@ import uk.gov.hmrc.ui.pages._
 import support.BaseSpec
 
 class TestSpec extends BaseSpec {
-    Feature("Test spec feature block") {
-        Scenario("Test spec feature scenario block") {
-            When("the test spec is ran.")
-            TestPage.navigateTo()
+  Feature("Test spec feature block") {
+    Scenario("Test spec feature scenario block") {
+      When("the test spec is ran.")
+      TestPage.navigateTo()
 
-            Then("the result should be positive.")
-            TestPage.assertPageTitleFull()
-            TestPage.assertUrlFull()
-        }
+      Then("the result should be positive.")
+      TestPage.assertPageTitleFull()
+      TestPage.assertUrlFull()
     }
+  }
 }
