@@ -18,4 +18,4 @@ package uk.gov.hmrc.ui.pages
 
 import support.BasePage
 
-object TestPage extends BasePage("/user_guide", "ScalaTest") {}
+object TestPage extends BasePage("", "gcc-free-trade-agreement-frontend") {}
