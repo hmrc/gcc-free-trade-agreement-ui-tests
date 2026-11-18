@@ -16,23 +16,21 @@
 
 package support
 
-// import uk.gov.hmrc.configuration.TestEnvironment // TO-DO: ADD WHEN AVAILABLE
+import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
-import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 
 import java.time.Duration
 
 abstract class BasePage(pageUrl: String, pageTitle: String) extends PageObject {
 
   // URLs
-  val baseUrl: String       =
-    "https://www.scalatest.org" // TO-DO: ADD WHEN AVAILABLE -- TestEnvironment.url("gcc-free-trade-agreement")
+  val baseUrl: String       = TestEnvironment.url("gcc-free-trade-agreement-frontend")
   val pageUrlFull: String   = s"$baseUrl$pageUrl"
-  val pageTitleFull: String = s"$pageTitle" // TO-DO: ADD WHEN AVAILABLE -- " - ServiceNameHere"
+  val pageTitleFull: String = s"$pageTitle - gcc-free-trade-agreement-frontend - GOV.UK"
 
   // Common Functions
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -51,4 +49,7 @@ abstract class BasePage(pageUrl: String, pageTitle: String) extends PageObject {
   def assertUrlFull(urlToCheck: String = pageUrlFull): Unit =
     fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
     assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
+
+  def clickLink(linkText: String): Unit =
+    click(By.cssSelector(linkText))
 }

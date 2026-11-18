@@ -22,10 +22,10 @@ import support.BaseSpec
 class TestSpec extends BaseSpec {
   Feature("Test spec feature block") {
     Scenario("Test spec feature scenario block") {
-      When("the test spec is ran.")
-      TestPage.navigateTo()
+      Given("the common setup is performed,")
+      performCommonSetup()
 
-      Then("the result should be positive.")
+      Then("the user should be on the basic front page")
       TestPage.assertPageTitleFull()
       TestPage.assertUrlFull()
     }
