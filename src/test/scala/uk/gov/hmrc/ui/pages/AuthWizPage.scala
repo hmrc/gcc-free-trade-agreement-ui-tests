@@ -26,8 +26,9 @@ object AuthWizPage extends BasePage("", "Authority Wizard") {
 
   def enterRedirectionUrl(): Unit =
     sendKeys(
-        By.cssSelector("#redirectionUrl"), 
-        "http://localhost:29501/gcc-free-trade-agreement-frontend") // TO-DO: Replace with landing page.
+      By.cssSelector("#redirectionUrl"),
+      "http://localhost:29501/gcc-free-trade-agreement-frontend"
+    ) // TO-DO: Replace with landing page.
 
   def continue(): Unit =
     click(By.cssSelector("input.govuk-button"))
