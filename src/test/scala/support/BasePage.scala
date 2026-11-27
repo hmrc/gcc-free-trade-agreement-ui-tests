@@ -32,6 +32,10 @@ abstract class BasePage(pageUrl: String, pageTitle: String) extends PageObject {
   val pageUrlFull: String   = s"$baseUrl$pageUrl"
   val pageTitleFull: String = s"$pageTitle - gcc-free-trade-agreement-frontend - GOV.UK"
 
+  // Selectors
+  val btnContinue: By = By.cssSelector("button.govuk-button")
+  val inpTextBox: By  = By.cssSelector("input.govuk-input")
+
   // Common Functions
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(10))
@@ -50,6 +54,9 @@ abstract class BasePage(pageUrl: String, pageTitle: String) extends PageObject {
     fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
     assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
 
-  def clickLink(linkText: String): Unit =
-    click(By.cssSelector(linkText))
+  def clickLink(linkText: String): Unit = click(By.cssSelector(linkText))
+
+  def continue(): Unit = click(btnContinue)
+
+  def clearAndSendKeys(value: String): Unit = sendKeys(inpTextBox, value)
 }

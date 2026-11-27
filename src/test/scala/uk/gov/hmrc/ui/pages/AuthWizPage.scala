@@ -18,18 +18,29 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
+import uk.gov.hmrc.ui.pages.TestPage
 import support.BasePage
+import support.ModelEnrolmentsData
 
-object AuthWizPage extends BasePage("", "Authority Wizard") {
+object AuthWizPage extends BasePage(null, "Authority Wizard") {
 
   override val pageUrlFull = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 
-  def enterRedirectionUrl(): Unit =
-    sendKeys(
-      By.cssSelector("#redirectionUrl"),
-      "http://localhost:29501/gcc-free-trade-agreement-frontend"
-    ) // TO-DO: Replace with landing page.
+  private val selectorRedirectUrl     = By.cssSelector("#redirectionUrl")
+  private val selectorEnrolmentKey    = By.cssSelector("#enrolment\\[0\\]\\.name")
+  private val selectorIdentifierName  = By.cssSelector("#input-0-0-name")
+  private val selectorIdentifierValue = By.cssSelector("#input-0-0-value")
 
-  def continue(): Unit =
+  override def continue(): Unit =
     click(By.cssSelector("input.govuk-button"))
+
+  def enterRedirectionUrl(): Unit =
+    // TO-DO: Replace with landing page.
+    sendKeys(selectorRedirectUrl, TestPage.pageUrlFull)
+
+  def enterEnrollment(userEnrolment: ModelEnrolmentsData): Unit = {
+    sendKeys(selectorEnrolmentKey, userEnrolment.enrolmentKey)
+    sendKeys(selectorIdentifierName, userEnrolment.identifierName)
+    sendKeys(selectorIdentifierValue, userEnrolment.identifierValue)
+  }
 }

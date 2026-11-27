@@ -22,6 +22,7 @@ import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
 
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.ui.pages.AuthWizPage
+import support.EnrolmentsDataBuilder.BuildEnrolment
 
 trait BaseSpec
     extends AnyFeatureSpec
@@ -32,9 +33,10 @@ trait BaseSpec
     with ScreenshotOnFailure {
 
   // Perform common setup
-  def performCommonSetup() = {
+  def performCommonSetup(enrolment: ModelEnrolmentsData = BuildEnrolment()) = {
     AuthWizPage.navigateTo()
     AuthWizPage.enterRedirectionUrl()
+    AuthWizPage.enterEnrollment(enrolment)
     AuthWizPage.continue()
   }
 
